@@ -1,0 +1,7 @@
+.link{
+    text-decoration: none;
+}
+
+.card:hover{
+    border: 2px solid rgb(219, 219, 219);
+}

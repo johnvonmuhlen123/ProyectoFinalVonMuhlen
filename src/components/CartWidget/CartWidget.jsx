@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./cart.module.css";
-import { GrCart } from "react-icons/gr";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const CartWidget = () => {
   return (
     <div className={styles.container}>
-      <GrCart />
+      <ShoppingCartIcon />
       <p>2</p>
     </div>
   );

@@ -1,10 +1,15 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 1rem;
 }
 
 .greeting{
     text-decoration: underline;
+}
+
+.titleContainer{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
