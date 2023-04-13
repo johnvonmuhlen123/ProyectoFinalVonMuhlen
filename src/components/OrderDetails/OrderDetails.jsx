@@ -2,11 +2,13 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import db from "../../../db/firebase-config.js";
+import Loading from "../Loading/Loading.jsx";
 
 const OrderDetails = () => {
   const [order, setOrder] = useState("");
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
   const { state } = useLocation();
+
   const { shouldBeHere, time, buyer } = state;
 
   if (shouldBeHere) {
@@ -28,7 +30,7 @@ const OrderDetails = () => {
         setOrder(doc);
         console.log(doc.id, " => ", doc.data());
       });
-      setLoading(false); // Set loading to false after data is loaded
+      setLoading(false);
     };
 
     useEffect(() => {
@@ -36,11 +38,7 @@ const OrderDetails = () => {
     }, []);
 
     if (loading) {
-      return (
-        <div>
-          <h2>Loading...</h2>
-        </div>
-      );
+      return <Loading />;
     }
 
     return (

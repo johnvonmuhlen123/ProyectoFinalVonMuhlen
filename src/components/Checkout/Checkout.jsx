@@ -72,7 +72,9 @@ const Checkout = () => {
       return;
     }
 
-    placeOrder();
+    if (!hasErrors) {
+      placeOrder();
+    }
   };
 
   const placeOrder = () => {
@@ -83,6 +85,7 @@ const Checkout = () => {
     }-${currentDate.getDate()}-${currentDate.getHours()}-${currentDate.getMinutes()}`;
 
     const products = [];
+    let totalCost = 0;
 
     cartItems.forEach((item) => {
       const product = {
@@ -90,11 +93,13 @@ const Checkout = () => {
         price: item.price,
         description: item.description,
       };
+      totalCost += item.price;
       products.push(product);
     });
 
     const newOrder = {
       products: products,
+      totalCost: totalCost,
       buyer: {
         name: formData.name,
         lastName: formData.lastName,
@@ -112,11 +117,9 @@ const Checkout = () => {
 
       localStorage.clear();
 
-      if (orderCompleted) {
-        navigate("/order-details", {
-          state: { shouldBeHere: true, time: now, buyer: newOrder.buyer },
-        });
-      }
+      navigate("/order-details", {
+        state: { shouldBeHere: true, time: now, buyer: newOrder.buyer },
+      });
     }
   };
 

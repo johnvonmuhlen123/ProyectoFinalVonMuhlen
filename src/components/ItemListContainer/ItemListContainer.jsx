@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 
 import db from "../../../db/firebase-config";
 import { collection, query, where, getDocs } from "firebase/firestore"; // Import 'query' and 'where' from firebase/firestore
+import Loading from "../Loading/Loading";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { category } = useParams();
 
   const itemsRef = collection(db, "items");
@@ -25,11 +27,16 @@ const ItemListContainer = () => {
       id: doc.id,
     }));
     setItems(items);
+    setLoading(false);
   };
 
   useEffect(() => {
     getItems();
   }, [category]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
