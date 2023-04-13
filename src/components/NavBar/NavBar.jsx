@@ -29,7 +29,7 @@ const NavBar = () => {
                 <NavLink
                   to={"/"}
                   className="nav-link"
-                  activeClassName={styles.active}
+                  activeclassname={styles.active}
                 >
                   Home
                 </NavLink>
@@ -38,7 +38,7 @@ const NavBar = () => {
                 <NavLink
                   to={"/category/jewelery"}
                   className="nav-link"
-                  activeClassName={styles.active}
+                  activeclassname={styles.active}
                 >
                   Jewelry
                 </NavLink>
@@ -47,7 +47,7 @@ const NavBar = () => {
                 <NavLink
                   to={`/category/${encodeURIComponent("men's clothing")}`}
                   className="nav-link"
-                  activeClassName={styles.active}
+                  activeclassname={styles.active}
                 >
                   Men's Clothing
                 </NavLink>
@@ -56,7 +56,7 @@ const NavBar = () => {
                 <NavLink
                   to={`/category/${encodeURIComponent("women's clothing")}`}
                   className="nav-link"
-                  activeClassName={styles.active}
+                  activeclassname={styles.active}
                 >
                   Women's Clothing
                 </NavLink>
@@ -65,7 +65,7 @@ const NavBar = () => {
                 <NavLink
                   to={"/category/electronics"}
                   className="nav-link"
-                  activeClassName={styles.active}
+                  activeclassname={styles.active}
                 >
                   Electronics
                 </NavLink>

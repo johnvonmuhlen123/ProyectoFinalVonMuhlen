@@ -3,22 +3,33 @@ import styles from "./item.module.css";
 import CardComponent from "./Card/Card";
 import { useParams } from "react-router-dom";
 
+import db from "../../../db/firebase-config";
+import { collection, query, where, getDocs } from "firebase/firestore"; // Import 'query' and 'where' from firebase/firestore
+
 const ItemListContainer = () => {
-  const [products, setProducts] = useState([]);
+  const [items, setItems] = useState([]);
   const { category } = useParams();
 
-  useEffect(() => {
-    fetch(
-      `https://fakestoreapi.com/products${
-        category ? `/category/${decodeURIComponent(category)}` : "?limit=20"
-      }`
-    )
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error(error));
-  }, [category]);
+  const itemsRef = collection(db, "items");
 
-  console.log(products);
+  const getItems = async () => {
+    let queryRef = itemsRef;
+
+    if (category) {
+      queryRef = query(itemsRef, where("category", "==", category));
+    }
+
+    const itemsCollection = await getDocs(queryRef);
+    const items = itemsCollection.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setItems(items);
+  };
+
+  useEffect(() => {
+    getItems();
+  }, [category]);
 
   return (
     <div>
@@ -33,8 +44,8 @@ const ItemListContainer = () => {
         </h1>
       </div>
       <div className={styles.container}>
-        {products.map((product) => (
-          <CardComponent key={product.id} product={product} />
+        {items.map((item) => (
+          <CardComponent clickable={true} key={item.id} product={item} />
         ))}
       </div>
     </div>
